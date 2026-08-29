@@ -1,6 +1,0 @@
-import Link from 'next/link'
-
-export default function Watch(){
- const source='https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4'
- return <main className="shell"><nav className="nav"><Link className="brand" href="/">SHADOW <span>SENPAI</span></Link><div className="navlinks"><Link href="/">Home</Link><a href="/#anime">Anime</a></div></nav><section className="content" style={{paddingTop:40}}><div className="sectionhead"><div><div className="eyebrow">Demo playback</div><h2 style={{marginTop:8}}>Big Buck Bunny</h2></div><span>CC BY 3.0 · Blender Foundation</span></div><div style={{background:'#000',borderRadius:18,overflow:'hidden',border:'1px solid #292934'}}><video controls playsInline preload="metadata" style={{width:'100%',display:'block',maxHeight:'70vh'}} poster="https://peach.blender.org/wp-content/uploads/title_anouncement.jpg?x11217"><source src={source} type="video/mp4"/></video></div><p className="meta" style={{fontSize:14,lineHeight:1.7,marginTop:18}}>This demo uses an openly licensed film hosted by Internet Archive. The player is ready for your own licensed HLS/MP4 catalog. Replace the source with media you are authorized to distribute.</p></section></main>
-}
