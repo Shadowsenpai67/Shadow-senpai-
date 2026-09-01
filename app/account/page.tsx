@@ -1,0 +1,9 @@
+import Link from "next/link";
+import { Icon } from "../icons";
+
+export default function AccountPage() {
+  return <main className="shell">
+    <nav className="nav"><Link className="brand" href="/">SHADOW<span>PLAY</span></Link><div className="links"><Link href="/">Home</Link><Link href="/games">Games</Link><Link href="/#discover">Discover</Link></div><Link className="btn secondary" href="/watch">Back to Fortnite</Link></nav>
+    <section className="watch account-page"><Link className="back" href="/games"><Icon name="arrow-left" size={16}/> Back to games</Link><div className="account-card"><div className="card-icon"><Icon name="users" size={46}/></div><span className="tag">MICROSOFT ACCOUNT</span><h1>Get into Fortnite faster.</h1><p>ShadowPlay cannot complete Microsoft's human verification or CAPTCHA for you. That check is intentionally handled by Microsoft. What we can do is keep the path simple and make sure you know exactly where to go.</p><div className="account-steps"><div><b>1</b><span>Open Microsoft's official account signup.</span></div><div><b>2</b><span>Complete the human verification when Microsoft asks for it.</span></div><div><b>3</b><span>Return to ShadowPlay and press Play Fortnite.</span></div></div><div className="actions"><a className="btn primary" href="https://signup.live.com/" target="_blank" rel="noreferrer"><Icon name="globe" size={16}/> Create Microsoft account</a><Link className="btn secondary" href="/watch"><Icon name="play" size={16}/> I already have an account</Link></div><div className="notice"><strong>If Microsoft keeps showing verification problems</strong><br/>Do not repeatedly retry or automate the check. Try the official signup flow from another supported browser or device and make sure your connection is stable. Microsoft controls the verification and account-creation decision.</div></div></section>
+  </main>;
+}
