@@ -1,0 +1,68 @@
+import { NextResponse } from "next/server";
+
+const TWITCH_TOKEN_URL = "https://id.twitch.tv/oauth2/token";
+const TWITCH_API = "https://api.twitch.tv/helix";
+
+export async function GET(request: Request) {
+  const { searchParams } = new URL(request.url);
+  const query = searchParams.get("q")?.trim() || "";
+  const limit = Math.min(Number(searchParams.get("limit") || 12), 24);
+  const clientId = process.env.TWITCH_CLIENT_ID;
+  const clientSecret = process.env.TWITCH_CLIENT_SECRET;
+
+  if (!clientId || !clientSecret) {
+    return NextResponse.json({
+      configured: false,
+      streams: [],
+      message: "Add TWITCH_CLIENT_ID and TWITCH_CLIENT_SECRET to enable live discovery.",
+    });
+  }
+
+  try {
+    const tokenResponse = await fetch(
+      `${TWITCH_TOKEN_URL}?client_id=${encodeURIComponent(clientId)}&client_secret=${encodeURIComponent(clientSecret)}&grant_type=client_credentials`,
+      { method: "POST", cache: "no-store" }
+    );
+    if (!tokenResponse.ok) throw new Error("Twitch authentication failed");
+    const token = await tokenResponse.json();
+
+    const gameResponse = await fetch(`${TWITCH_API}/games?name=Fortnite`, {
+      headers: { "Client-ID": clientId, Authorization: `Bearer ${token.access_token}` },
+      next: { revalidate: 60 },
+    });
+    if (!gameResponse.ok) throw new Error("Could not resolve Fortnite on Twitch");
+    const game = await gameResponse.json();
+    const gameId = game.data?.[0]?.id;
+    if (!gameId) throw new Error("Fortnite game not found");
+
+    const endpoint = query
+      ? `${TWITCH_API}/search/channels?query=${encodeURIComponent(query)}&live_only=true&first=${limit}`
+      : `${TWITCH_API}/streams?game_id=${encodeURIComponent(gameId)}&first=${limit}&type=live&language=en`;
+
+    const response = await fetch(endpoint, {
+      headers: { "Client-ID": clientId, Authorization: `Bearer ${token.access_token}` },
+      next: { revalidate: 30 },
+    });
+    if (!response.ok) throw new Error("Twitch streams request failed");
+    const payload = await response.json();
+
+    const streams = (payload.data || []).map((item: any) => ({
+      id: item.id,
+      userId: item.user_id,
+      userName: item.user_name,
+      title: item.title,
+      gameName: item.game_name || "Fortnite",
+      viewerCount: item.viewer_count || 0,
+      startedAt: item.started_at,
+      thumbnail: item.thumbnail_url?.replace("{width}", "640").replace("{height}", "360"),
+      profileImage: item.profile_image_url,
+      language: item.language,
+      tags: item.tags || [],
+      isLive: item.type === "live" || item.is_live === true,
+    }));
+
+    return NextResponse.json({ configured: true, streams, gameId });
+  } catch (error) {
+    return NextResponse.json({ configured: true, streams: [], message: error instanceof Error ? error.message : "Unable to load live streams" }, { status: 502 });
+  }
+}
