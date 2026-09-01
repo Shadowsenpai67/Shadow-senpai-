@@ -1,4 +1,4 @@
-import type { SVGProps } from "react";
+import type { ReactNode, SVGProps } from "react";
 
 type IconName =
   | "play"
@@ -16,7 +16,7 @@ type IconName =
   | "chevron-down"
   | "check";
 
-const paths: Record<IconName, React.ReactNode> = {
+const paths: Record<IconName, ReactNode> = {
   play: <path d="M8 5.5v13l10-6.5-10-6.5Z" fill="currentColor" stroke="none" />,
   gamepad: <><path d="m7.2 8.2-1.1 7.1a2.7 2.7 0 0 0 4.8 2.1l1.1-1.4h4l1.1 1.4a2.7 2.7 0 0 0 4.8-2.1l-1.1-7.1A4 4 0 0 0 16.8 5H7.2a4 4 0 0 0-4 3.2Z" /><path d="M8 10v4M6 12h4M16.5 11.5h.01M19 14h.01" /></>,
   cloud: <path d="M7 18h11a4 4 0 0 0 .6-8A6 6 0 0 0 7 8.5 4.5 4.5 0 0 0 7 18Z" />,
