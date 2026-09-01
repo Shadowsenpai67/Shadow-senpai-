@@ -3,11 +3,12 @@ export type Game = {
   name: string;
   platform: string;
   description: string;
-  status: "featured" | "cloud" | "official";
+  status: "featured" | "cloud" | "official" | "free-browser";
   playUrl: string;
   note: string;
   actionLabel: string;
   browserPlayable: boolean;
+  freeInNigeria: boolean;
 };
 
 export const games: Game[] = [
@@ -15,45 +16,49 @@ export const games: Game[] = [
     slug: "fortnite",
     name: "Fortnite",
     platform: "Xbox Cloud Gaming",
-    description: "Fortnite can be streamed through Xbox Cloud Gaming in supported regions, but Nigeria is not currently a supported Xbox Cloud Gaming market.",
+    description: "Fortnite is a free-to-play game, but Xbox Cloud Gaming still requires a supported region. Nigeria is not currently a supported Xbox Cloud Gaming market.",
     status: "featured",
     playUrl: "https://www.xbox.com/play/games/fortnite-battle-royale/9p6lnn3kz75r",
-    note: "Do not show this as browser-ready in Nigeria. Xbox Cloud Gaming requires a supported region and account.",
+    note: "Free game does not mean free cloud streaming. This is not presented as browser-playable from Nigeria.",
     actionLabel: "Check Xbox Cloud Gaming",
     browserPlayable: false,
+    freeInNigeria: false,
   },
   {
     slug: "black-ops-7",
     name: "Call of Duty: Black Ops 7",
     platform: "Xbox Cloud Gaming",
-    description: "Cloud play depends on Xbox Cloud Gaming regional support, the game entitlement and the applicable Game Pass plan.",
+    description: "Black Ops 7 can only be streamed where Xbox Cloud Gaming supports the game, account and region, with the required entitlement or Game Pass plan.",
     status: "cloud",
     playUrl: "https://www.xbox.com/play",
-    note: "Nigeria is not currently listed as an Xbox Cloud Gaming market, so this is not presented as a working Nigerian browser stream.",
+    note: "Not a free Nigerian browser stream. Xbox says cloud availability varies by region, plan and platform.",
     actionLabel: "Check Xbox Cloud Gaming",
     browserPlayable: false,
+    freeInNigeria: false,
   },
   {
     slug: "call-of-duty",
     name: "Call of Duty / Warzone",
     platform: "Xbox Cloud Gaming",
-    description: "Supported Call of Duty experiences can be streamed through Xbox Cloud Gaming where the service is available.",
+    description: "Supported Call of Duty experiences can be streamed through Xbox Cloud Gaming where the service and title are available.",
     status: "cloud",
     playUrl: "https://www.xbox.com/play",
-    note: "Nigeria is not currently listed as an Xbox Cloud Gaming market, so this route is marked region-limited rather than falsely playable.",
+    note: "Warzone is free-to-play, but cloud streaming still depends on Xbox regional support. This is not presented as a free Nigerian browser stream.",
     actionLabel: "Check Xbox Cloud Gaming",
     browserPlayable: false,
+    freeInNigeria: false,
   },
   {
     slug: "apex-legends",
     name: "Apex Legends",
-    platform: "airgpu Cloud PC · Africa (Cape Town)",
-    description: "For Nigeria, the better fit is a cloud PC with an African data-center option rather than GeForce NOW. airgpu provides GPU cloud PCs and lists Cape Town among its African locations.",
+    platform: "Cloud PC · Africa (Cape Town)",
+    description: "Apex is free-to-play, but a cloud PC is not free. airgpu is a practical African-region cloud-PC route and can be used to install Apex through an official PC launcher, subject to availability and anti-cheat compatibility.",
     status: "cloud",
     playUrl: "https://airgpu.com/",
-    note: "Apex is available on airgpu according to current cloud-gaming catalogues. You create a cloud PC, install Apex through an official PC launcher, then stream it using Parsec or Moonlight. Availability and anti-cheat compatibility can change.",
-    actionLabel: "Launch airgpu",
+    note: "This is an external cloud PC, not a free ShadowPlay-hosted browser session. Do not show Apex as free or browser-ready.",
+    actionLabel: "Check airgpu",
     browserPlayable: false,
+    freeInNigeria: false,
   },
   {
     slug: "cod-mobile",
@@ -62,9 +67,10 @@ export const games: Game[] = [
     description: "The official mobile Call of Duty experience for supported Android and iOS devices.",
     status: "official",
     playUrl: "https://www.callofduty.com/mobile",
-    note: "There is no official ShadowPlay browser-streaming session for COD Mobile, so we do not pretend this is cloud playable.",
-    actionLabel: "Open official mobile page",
+    note: "This is not a ShadowPlay browser stream. It requires the official mobile game/app.",
+    actionLabel: "Open official game page",
     browserPlayable: false,
+    freeInNigeria: false,
   },
   {
     slug: "free-fire",
@@ -73,9 +79,10 @@ export const games: Game[] = [
     description: "Garena's official mobile battle royale experience.",
     status: "official",
     playUrl: "https://ff.garena.com/",
-    note: "There is no supported official ShadowPlay browser-streaming session, so this opens the official game page instead of a fake stream.",
+    note: "This is not a ShadowPlay browser stream. It requires the official mobile game/app.",
     actionLabel: "Open official game page",
     browserPlayable: false,
+    freeInNigeria: false,
   },
   {
     slug: "playstation",
@@ -87,6 +94,7 @@ export const games: Game[] = [
     note: "Remote Play uses your own PlayStation console; it is not a ShadowPlay-hosted cloud session.",
     actionLabel: "Set up Remote Play",
     browserPlayable: false,
+    freeInNigeria: false,
   },
 ];
 
