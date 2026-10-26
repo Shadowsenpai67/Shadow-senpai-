@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { AnimeMedia } from "../lib/anilist";
 
 type Entry = { title: string; query: string; tag: string; text: string; media: AnimeMedia | null };
@@ -19,9 +19,12 @@ function trailerHref(title: string, media: AnimeMedia | null) {
 export default function AnimeBrowser({ entries, selectedTitle = "" }: { entries: Entry[]; selectedTitle?: string }) {
   const [showMore, setShowMore] = useState(!selectedTitle);
   const selected = entries.find(entry => entry.query.toLowerCase() === selectedTitle.toLowerCase() || entry.title.toLowerCase() === selectedTitle.toLowerCase());
-  const visible = selected && !showMore ? [selected] : showMore ? entries : entries.slice(0, 4);
+  useEffect(() => {
+    setShowMore(!selectedTitle);
+  }, [selectedTitle]);
+  const visible = selectedTitle ? (selected ? [selected] : []) : showMore ? entries : entries.slice(0, 4);
   return <>
-    {selected && !showMore && <div className="selected-anime-bar"><span>NOW VIEWING: <strong>{selected.title}</strong></span><button type="button" onClick={() => setShowMore(true)} className="button button-hot">See more anime ↓</button></div>}
+    {selectedTitle && selected && <div className="selected-anime-bar"><span>NOW VIEWING: <strong>{selected.title}</strong></span></div> }
     <div className="anime-browser-grid">
       {visible.map((entry, i) => {
         const title = entry.media?.title?.english || entry.media?.title?.romaji || entry.title;
@@ -44,6 +47,6 @@ export default function AnimeBrowser({ entries, selectedTitle = "" }: { entries:
       <button type="button" className="button button-hot" onClick={() => setShowMore(v => !v)} aria-expanded={showMore}>{showMore ? "Show fewer anime" : "See more anime"} <span>{showMore ? "↑" : "↓"}</span></button>
       <p>{showMore ? "You’re seeing the full anime list." : "Tap to reveal more series, trailers and legal watch-platform searches."}</p>
     </div>}
-    {selected && showMore && <div className="more-anime-control"><button type="button" className="button button-hot" onClick={() => setShowMore(false)}>Show only {selected.title} ↑</button></div>}
+
   </>;
 }
