@@ -33,7 +33,7 @@ export default function AnimeBrowser({ entries, selectedTitle = "" }: { entries:
             <span className="trailer-overlay">▶ WATCH TRAILER</span>
           </a>
           <div className="anime-browser-copy">
-            <span className="pill">{entry.tag}</span><h3>{title}</h3><p>{entry.text}</p>
+            <span className="pill">{entry.tag}</span><a className="anime-title-link" href={"/anime?title=" + encodeURIComponent(entry.query)}><h3>{title}</h3></a><p>{entry.text}</p>
             <a className="trailer-link" href={trailer} target="_blank" rel="noopener noreferrer">▶ Watch trailer ↗</a>
             <div className="watch-links">{providers(title).map(p => <a key={p.label} href={p.href} target="_blank" rel="noopener noreferrer">{p.label}</a>)}</div>
           </div>
