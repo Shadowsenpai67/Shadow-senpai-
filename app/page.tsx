@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { searchAnime } from "./lib/anilist";
+import AnnouncementTicker from "./components/announcement-ticker";
 
 const series = [
   { name: "ONE PIECE", sub: "Pirates, mysteries & the search for the ultimate treasure", label: "FEATURED", query: "One Piece", tone: "onepiece" },
@@ -13,7 +14,7 @@ export const dynamic = "force-dynamic";
 export default async function Home() {
   const posters = await Promise.all(series.map((item) => searchAnime(item.query)));
   return <main className="site-shell">
-    <div className="announcement">YOUR NEXT ANIME OBSESSION STARTS HERE <span>✦</span> NEWS · GUIDES · GEAR</div>
+    <AnnouncementTicker initial="YOUR NEXT ANIME OBSESSION STARTS HERE" suffix="NEWS · GUIDES · GEAR" />
     <header className="nav">
       <Link className="brand" href="/">ANIME WORLD <span>✦</span><small>OTAKU CENTRAL</small></Link>
       <nav className="nav-links" aria-label="Main navigation">
@@ -36,7 +37,7 @@ export default async function Home() {
 
     <section className="section-block">
       <div className="section-heading"><div><span className="section-kicker">PICK YOUR UNIVERSE</span><h2>Enter the <em>worlds.</em></h2></div><Link href="/anime" className="view-link">ALL ANIME <span>↗</span></Link></div>
-      <div className="series-grid">{series.map((s, i) => { const media = posters[i]; const image = media?.coverImage?.extraLarge || media?.coverImage?.large; return <Link href="/anime" className={`series-card ${s.tone}`} key={s.name}><div className="series-card-image">{image ? <img src={image} alt={s.name+" poster"} loading="lazy"/> : null}</div><div className="series-number">0{i + 1}</div><div className="series-content"><span className="series-label">{s.label}</span><h3>{s.name}</h3><p>{s.sub}</p><span className="card-arrow">↗</span></div></Link>;})}</div>
+      <div className="series-grid">{series.map((s, i) => { const media = posters[i]; const image = media?.coverImage?.extraLarge || media?.coverImage?.large; return <Link href={s.tone === "more" ? "/anime" : "/anime?title=" + encodeURIComponent(s.query)} className={`series-card ${s.tone}`} key={s.name}><div className="series-card-image">{image ? <img src={image} alt={s.name+" poster"} loading="lazy"/> : null}</div><div className="series-number">0{i + 1}</div><div className="series-content"><span className="series-label">{s.label}</span><h3>{s.name}</h3><p>{s.sub}</p><span className="card-arrow">↗</span></div></Link>;})}</div>
     </section>
 
     <section className="feature-band"><div className="feature-symbol">巻</div><div><span className="section-kicker">THE OTAKU BRIEFING</span><h2>Know the lore.<br/><em>Catch every detail.</em></h2><p>Clear explainers, arc guides and character breakdowns made for fans who want more than a quick recap.</p></div><Link className="button button-light" href="/news">Explore news & guides <span>↗</span></Link></section>
