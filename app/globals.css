@@ -104,3 +104,6 @@
 .selected-anime-bar{display:flex;align-items:center;justify-content:space-between;gap:15px;margin:0 6vw 20px;padding:14px 16px;border:1px solid var(--line);background:var(--panel);font:10px 'DM Mono',monospace;letter-spacing:.08em;color:var(--muted)}
 .selected-anime-bar strong{color:var(--hot);font-family:Manrope,system-ui,sans-serif;font-size:13px}
 @media(max-width:520px){.announcement-rotating{font-size:8px;letter-spacing:.04em;gap:6px}.announcement-rotating .ticker-suffix{display:none}.selected-anime-bar{margin-left:5vw;margin-right:5vw;align-items:flex-start;flex-direction:column}}
+
+.news-poster-play{position:absolute;z-index:2;left:12px;bottom:48px;display:inline-flex;align-items:center;justify-content:center;padding:9px 11px;background:var(--hot);color:#200d0b;font:800 9px 'DM Mono',monospace;letter-spacing:.06em;border:1px solid var(--hot);border-radius:3px}
+.news-poster-play:hover{background:#ff765e}
