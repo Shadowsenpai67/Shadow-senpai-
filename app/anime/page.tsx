@@ -1,0 +1,16 @@
+import Link from "next/link";
+
+const groups = [
+  { title: "One Piece", tag: "PIRATE SAGA", text: "Follow the Straw Hat crew, uncover mysteries of the Grand Line, and revisit the battles, Devil Fruits and world secrets that keep fans theorising.", items: ["Character guides & crew roles", "Devil Fruits and Haki explained", "Arc watch guides and key battles"] },
+  { title: "Naruto", tag: "SHINOBI CHRONICLES", text: "Explore ninja villages, rivalries, jutsu, clans and the stories behind the shinobi world.", items: ["Character and clan profiles", "Jutsu and power explainers", "Essential story arcs"] },
+  { title: "Bleach", tag: "SOUL REAPER FILES", text: "Dive into Soul Society, Zanpakutō, Bankai, Hollow powers and the warriors behind the biggest confrontations.", items: ["Bankai reference guides", "Zanpakutō and Shinigami profiles", "Major battles and transformations"] },
+  { title: "More anime", tag: "NEXT WATCH", text: "Find your next series with starter guides, genre lists and spoiler-aware recommendations across action, fantasy, comedy and more.", items: ["Beginner watch lists", "Genre and mood recommendations", "Season and episode explainers"] },
+];
+
+export default function AnimeHub() {
+ return <main className="site-shell"><div className="announcement">ANIME INDEX <span>✦</span> FIND YOUR NEXT UNIVERSE</div><header className="nav"><Link className="brand" href="/">ANIME WORLD <span>✦</span><small>OTAKU CENTRAL</small></Link><nav className="nav-links"><Link href="/">Home</Link><Link className="active" href="/anime">Anime hub</Link><Link href="/news">News & guides</Link><Link href="/merch">Merch picks</Link></nav><Link className="nav-cta" href="/news">Read guides <span>↗</span></Link></header>
+ <section className="page-hero"><span className="section-kicker">CHOOSE YOUR UNIVERSE</span><h1>THE ANIME<br/><span>INDEX.</span></h1><p>Start with the worlds you love. This hub is organised for character deep-dives, power explanations and useful watch guides. Articles are fan-made and clearly marked when they contain spoilers.</p></section>
+ <section className="content-grid">{groups.map((g,i)=><article className="content-card" key={g.title}><span className="index">FILE / 0{i+1}</span><h2>{g.title}</h2><span className="pill">{g.tag}</span><p>{g.text}</p><ul>{g.items.map(item=><li key={item}>{item}</li>)}</ul><Link href="/news">Explore guides ↗</Link></article>)}</section>
+ <div className="disclaimer-box">Spoiler note: anime and manga details can differ, and manga material may reveal events not yet shown in the anime. Each future guide should label its spoiler range. Anime World: Otaku Central is an independent fan project and is not affiliated with the series' creators or publishers.</div>
+ <footer className="footer"><Link className="brand footer-brand" href="/">ANIME WORLD <span>✦</span><small>OTAKU CENTRAL</small></Link><p>Made for fans. Built for discovery.</p><div><Link href="/anime">Anime hub</Link><Link href="/news">News & guides</Link><Link href="/merch">Merch picks</Link></div><small>Independent fan site. Not affiliated with any anime studios or rights holders.</small></footer></main>;
+}
