@@ -107,3 +107,5 @@
 
 .news-poster-play{position:absolute;z-index:2;left:12px;bottom:48px;display:inline-flex;align-items:center;justify-content:center;padding:9px 11px;background:var(--hot);color:#200d0b;font:800 9px 'DM Mono',monospace;letter-spacing:.06em;border:1px solid var(--hot);border-radius:3px}
 .news-poster-play:hover{background:#ff765e}
+
+.anime-title-link{display:block}.anime-title-link:hover h3{color:var(--hot)}
