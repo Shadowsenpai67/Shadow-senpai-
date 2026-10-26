@@ -1,4 +1,5 @@
 import Link from "next/link";
+import AnnouncementTicker from "../components/announcement-ticker";
 import { animeTitle, formatAnimeDate, getSeasonAnime, getUpcomingEpisodes } from "../lib/anilist";
 
 export const dynamic = "force-dynamic";
@@ -26,7 +27,7 @@ function Poster({ src, title }: { src?: string | null; title: string }) {
 export default async function SchedulePage() {
   const [episodes, seasonAnime] = await Promise.all([getUpcomingEpisodes(), getSeasonAnime()]);
   return <main className="site-shell">
-    <div className="announcement">THE ANIME CALENDAR <span>✦</span> DATES DISPLAYED IN NIGERIA TIME (WAT)</div>
+    <AnnouncementTicker initial="THE ANIME CALENDAR" suffix="DATES DISPLAYED IN NIGERIA TIME (WAT)" />
     <header className="nav">
       <Link className="brand" href="/">ANIME WORLD <span>✦</span><small>OTAKU CENTRAL</small></Link>
       <nav className="nav-links" aria-label="Main navigation"><Link href="/">Home</Link><Link href="/anime">Anime hub</Link><Link href="/news">News & guides</Link><Link className="active" href="/schedule">Schedule</Link><Link href="/merch">Merch picks</Link></nav>
