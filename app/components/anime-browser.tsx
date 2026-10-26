@@ -31,9 +31,9 @@ export default function AnimeBrowser({ entries, selectedTitle = "" }: { entries:
         const image = entry.media?.coverImage?.extraLarge || entry.media?.coverImage?.large;
         const trailer = trailerHref(title, entry.media);
         return <article className="anime-browser-card" key={entry.title}>
-          <a className="anime-browser-poster" href={trailer} target="_blank" rel="noopener noreferrer" aria-label={"Play trailer for " + title}>
+          <a className="anime-browser-poster" href={"/anime?title=" + encodeURIComponent(entry.query)} aria-label={"View only " + title + " in Anime Hub"}>
             {image ? <img src={image} alt={title + " poster"} loading={i < 4 ? "eager" : "lazy"} fetchPriority={i < 2 ? "high" : "auto"} /> : <div className="poster-fallback">ANIME<br/><span>✦</span></div>}
-            <span className="trailer-overlay">▶ WATCH TRAILER</span>
+            <span className="trailer-overlay">VIEW THIS ANIME</span>
           </a>
           <div className="anime-browser-copy">
             <span className="pill">{entry.tag}</span><a className="anime-title-link" href={"/anime?title=" + encodeURIComponent(entry.query)}><h3>{title}</h3></a><p>{entry.text}</p>
