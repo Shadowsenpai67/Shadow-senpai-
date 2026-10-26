@@ -4,7 +4,8 @@ export type AnimeMedia = {
   coverImage?: { large?: string | null; extraLarge?: string | null };
   description?: string | null;
   genres?: string[];
-  siteUrl?: string;\n  trailer?: { id?: string | null; site?: string | null; thumbnail?: string | null } | null;
+  siteUrl?: string;
+  trailer?: { id?: string | null; site?: string | null; thumbnail?: string | null } | null;
   status?: string;
   episodes?: number | null;
   season?: string | null;
