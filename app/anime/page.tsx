@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { searchAnime } from "../lib/anilist";
 import AnimeBrowser from "../components/anime-browser";
+import AnnouncementTicker from "../components/announcement-ticker";
 
 export const dynamic = "force-dynamic";
 
@@ -19,15 +20,17 @@ const series = [
   { title: "Chainsaw Man", query: "Chainsaw Man", tag: "DEVIL HUNTERS", text: "Discover the official trailer and check legal platforms for availability." },
 ];
 
-export default async function AnimeHub() {
+export default async function AnimeHub({ searchParams }: { searchParams: Promise<{ title?: string }> | { title?: string } }) {
+  const params = await searchParams;
+  const selectedTitle = params.title || "";
   const results = await Promise.all(series.map((item) => searchAnime(item.query)));
   const entries = series.map((item, index) => ({ ...item, media: results[index] }));
   return <main className="site-shell">
-    <div className="announcement">ANIME INDEX <span>✦</span> FIND YOUR NEXT UNIVERSE</div>
+    <AnnouncementTicker initial="ANIME INDEX" suffix="FIND YOUR NEXT UNIVERSE" />
     <header className="nav"><Link className="brand" href="/">ANIME WORLD <span>✦</span><small>OTAKU CENTRAL</small></Link><nav className="nav-links" aria-label="Main navigation"><Link href="/">Home</Link><Link className="active" href="/anime">Anime hub</Link><Link href="/news">News & guides</Link><Link href="/schedule">Schedule</Link><Link href="/merch">Merch picks</Link></nav><Link className="nav-cta" href="/schedule">Upcoming eps <span>↗</span></Link></header>
     <section className="page-hero"><span className="section-kicker">CHOOSE YOUR UNIVERSE</span><h1>THE ANIME<br/><span>INDEX.</span></h1><p>Tap any poster to find its trailer. Use the small platform buttons to search official catalogues and check where each anime is available. Availability varies by country.</p></section>
-    <section className="schedule-section"><div className="section-heading"><div><span className="section-kicker">FAN FAVOURITES & MORE</span><h2>Find your next <em>world.</em></h2></div><span className="schedule-source">Trailers + watch links</span></div><AnimeBrowser entries={entries}/></section>
-    <div className="disclaimer-box">Trailer buttons search YouTube for official trailers; check the channel and rights holder before watching. Streaming buttons search Crunchyroll, Netflix and Prime Video catalogues. Availability, subscriptions and language options differ by country. This fan site does not host anime episodes.</div>
+    <section className="schedule-section"><div className="section-heading"><div><span className="section-kicker">FAN FAVOURITES & MORE</span><h2>Find your next <em>world.</em></h2></div><span className="schedule-source">Trailers + watch links</span></div><AnimeBrowser entries={entries} selectedTitle={selectedTitle}/></section>
+    <div className="disclaimer-box">When AniList provides a trailer ID, trailer buttons open that video directly; if a title has no trailer ID listed, the button searches YouTube for an official trailer. Streaming buttons search Crunchyroll, Netflix and Prime Video catalogues. Availability, subscriptions and language options differ by country. This fan site does not host anime episodes.</div>
     <footer className="footer"><Link className="brand footer-brand" href="/">ANIME WORLD <span>✦</span><small>OTAKU CENTRAL</small></Link><p>Made for fans. Built for discovery.</p><div><Link href="/anime">Anime hub</Link><Link href="/news">News & guides</Link><Link href="/schedule">Schedule</Link><Link href="/about">About</Link><Link href="/disclosure">Affiliate disclosure</Link><Link href="/merch">Merch picks</Link></div><small>Independent fan site. Not affiliated with any anime studios or rights holders.</small></footer>
   </main>;
 }
