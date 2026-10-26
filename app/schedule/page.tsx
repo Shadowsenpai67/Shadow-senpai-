@@ -3,7 +3,7 @@ import { animeTitle, formatAnimeDate, getSeasonAnime, getUpcomingEpisodes } from
 
 export const dynamic = "force-dynamic";
 
-function watchSearch(title: string) {
+function trailerSearch(title: string, episode?: number | null) {\n  const query = episode ? title + " episode " + episode + " preview trailer" : title + " official anime trailer";\n  return "https://www.youtube.com/results?search_query=" + encodeURIComponent(query);\n}\n\nfunction watchSearch(title: string) {
   return [
     { label: "Crunchyroll", href: "https://www.crunchyroll.com/search?q=" + encodeURIComponent(title) },
     { label: "Netflix", href: "https://www.netflix.com/search?q=" + encodeURIComponent(title) },
@@ -37,7 +37,7 @@ export default async function SchedulePage() {
         return <article className="schedule-card" key={media.id + "-" + (airing?.episode ?? index)}>
           <Poster src={media.coverImage?.extraLarge || media.coverImage?.large} title={title}/>
           <div className="schedule-card-copy"><span className="pill">EPISODE {airing?.episode ?? "TBA"}</span><h3>{title}</h3><p className="airing-time">{formatAnimeDate(airing?.airingAt)}</p>
-            <div className="watch-links">{watchSearch(title).map((provider) => <a key={provider.label} href={provider.href} target="_blank" rel="noopener noreferrer">{provider.label} ↗</a>)}</div>
+            <div className="watch-links"><a className="trailer-link" href={trailerSearch(title, airing?.episode)} target="_blank" rel="noopener noreferrer">▶ Episode preview / trailer</a>{watchSearch(title).map((provider) => <a key={provider.label} href={provider.href} target="_blank" rel="noopener noreferrer">{provider.label} ↗</a>)}</div>
           </div>
         </article>;
       })}</div> : <div className="disclaimer-box">The live episode schedule is temporarily unavailable. Try again shortly, or check the official <a href="https://www.crunchyroll.com/simulcastcalendar" target="_blank" rel="noopener noreferrer">Crunchyroll release calendar ↗</a>.</div>}
@@ -53,7 +53,7 @@ export default async function SchedulePage() {
           <Poster src={media.coverImage?.extraLarge || media.coverImage?.large} title={title}/>
           <div className="schedule-card-copy"><span className="pill">{media.status?.replaceAll("_", " ") || "SEASON PICK"}</span><h3>{title}</h3><p>{start} · {media.episodes ? media.episodes + " episodes listed" : "Episode count TBA"}</p>
             <p className="season-description">{media.description?.replace(/<[^>]*>/g, "").replace(/&#039;/g, "'").slice(0, 170) || "Season details and episode announcements may be updated as more information is confirmed."}{media.description && media.description.length > 170 ? "…" : ""}</p>
-            <div className="watch-links">{watchSearch(title).map((provider) => <a key={provider.label} href={provider.href} target="_blank" rel="noopener noreferrer">{provider.label} ↗</a>)}</div>
+            <div className="watch-links"><a className="trailer-link" href={trailerSearch(title)} target="_blank" rel="noopener noreferrer">▶ Official trailer</a>{watchSearch(title).map((provider) => <a key={provider.label} href={provider.href} target="_blank" rel="noopener noreferrer">{provider.label} ↗</a>)}</div>
           </div>
         </article>;
       })}</div> : <div className="disclaimer-box">Season information is temporarily unavailable. Visit the <a href="https://www.crunchyroll.com/news/seasonal-lineup/2026/9/15/fall-anime-2026-crunchyroll" target="_blank" rel="noopener noreferrer">official Fall 2026 Crunchyroll lineup ↗</a>.</div>}
