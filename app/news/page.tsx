@@ -1,0 +1,18 @@
+import Link from "next/link";
+
+const articles = [
+ {num:"01",type:"STARTER GUIDE",title:"One Piece: A beginner-friendly arc watch guide",desc:"A structured way to follow the main story, keep track of major arcs and decide where you want deeper recaps.",note:"Guide framework · Add episode ranges and verified updates before publication"},
+ {num:"02",type:"POWER EXPLAINER",title:"Haki explained: Observation, Armament and Conqueror’s",desc:"A clear introduction to the three major Haki categories, what each can do and how advanced applications differ.",note:"Explainer · Anime and manga spoilers may apply"},
+ {num:"03",type:"CHARACTER FILE",title:"Bleach Bankai: what makes each release unique?",desc:"A reference-style guide to Bankai names, owners, abilities and the story moments where they appear.",note:"Reference guide · Verify names and episode details before publishing"},
+ {num:"04",type:"SHINOBI FILE",title:"Naruto’s major chakra natures and signature jutsu",desc:"A quick route through chakra basics, elemental transformations and the techniques fans ask about most.",note:"Explainer · Spoiler range should be added before publication"},
+ {num:"05",type:"WATCH LIST",title:"What should you watch after a long-running shonen?",desc:"Choose your next anime by pacing, tone, fight choreography, world-building and how much time you have.",note:"Recommendation guide · Your taste comes first"},
+ {num:"06",type:"SITE UPDATE",title:"Otaku Central launch notes",desc:"We are building a fan-first library of anime guides and carefully labelled shopping recommendations.",note:"Project update · Not a breaking-news report"},
+];
+
+export default function NewsGuides() {
+ return <main className="site-shell"><div className="announcement">THE OTAKU BRIEFING <span>✦</span> GUIDES, LORE & UPDATES</div><header className="nav"><Link className="brand" href="/">ANIME WORLD <span>✦</span><small>OTAKU CENTRAL</small></Link><nav className="nav-links"><Link href="/">Home</Link><Link href="/anime">Anime hub</Link><Link className="active" href="/news">News & guides</Link><Link href="/merch">Merch picks</Link></nav><Link className="nav-cta" href="/anime">Anime index <span>↗</span></Link></header>
+ <section className="page-hero"><span className="section-kicker">THE OTAKU BRIEFING</span><h1>LORE, NEWS<br/>& <span>GUIDES.</span></h1><p>Helpful anime explainers and watch resources, written for fans. This starter library is clearly labelled: it does not pretend to be a live news feed. Current events should be checked against official announcements before being published as news.</p></section>
+ <section className="content-grid">{articles.map(a=><article className="content-card" key={a.num}><span className="index">ARTICLE / {a.num}</span><h3>{a.title}</h3><span className="pill">{a.type}</span><p>{a.desc}</p><div className="article-note">{a.note}</div><Link href="/anime">Browse anime hub ↗</Link></article>)}</section>
+ <div className="disclaimer-box"><strong>Editorial standard:</strong> We will date time-sensitive updates, link to primary/official announcements where possible, distinguish confirmed information from rumours, and label manga spoilers. Do not publish copied articles, copyrighted episode footage, or unverified release claims.</div>
+ <footer className="footer"><Link className="brand footer-brand" href="/">ANIME WORLD <span>✦</span><small>OTAKU CENTRAL</small></Link><p>Made for fans. Built for discovery.</p><div><Link href="/anime">Anime hub</Link><Link href="/news">News & guides</Link><Link href="/merch">Merch picks</Link></div><small>Independent fan site. Not affiliated with any anime studios or rights holders.</small></footer></main>;
+}
