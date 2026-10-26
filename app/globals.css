@@ -93,3 +93,14 @@
 .news-poster-shell .poster-fallback{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center}
 .news-poster-shell.is-loaded img{animation:posterFadeIn .22s ease-out}
 @keyframes posterFadeIn{from{opacity:.45}to{opacity:1}}
+
+/* Rotating orange announcement ticker */
+.announcement-rotating{position:relative;overflow:hidden;gap:10px;isolation:isolate}
+.announcement-rotating .ticker-message{display:inline-block;animation:tickerPop .45s ease both;font-weight:700}
+.announcement-rotating .ticker-suffix{font-weight:500}
+.announcement-rotating b{font-size:14px;animation:tickerSpin 3.2s linear infinite;display:inline-block}
+@keyframes tickerPop{from{opacity:0;transform:translateY(9px) rotateX(-18deg)}to{opacity:1;transform:translateY(0) rotateX(0)}}
+@keyframes tickerSpin{to{transform:rotate(360deg)}}
+.selected-anime-bar{display:flex;align-items:center;justify-content:space-between;gap:15px;margin:0 6vw 20px;padding:14px 16px;border:1px solid var(--line);background:var(--panel);font:10px 'DM Mono',monospace;letter-spacing:.08em;color:var(--muted)}
+.selected-anime-bar strong{color:var(--hot);font-family:Manrope,system-ui,sans-serif;font-size:13px}
+@media(max-width:520px){.announcement-rotating{font-size:8px;letter-spacing:.04em;gap:6px}.announcement-rotating .ticker-suffix{display:none}.selected-anime-bar{margin-left:5vw;margin-right:5vw;align-items:flex-start;flex-direction:column}}
