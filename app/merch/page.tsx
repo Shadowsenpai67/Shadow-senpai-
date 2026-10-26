@@ -1,4 +1,5 @@
 import Link from "next/link";
+import AnnouncementTicker from "../components/announcement-ticker";
 
 const picks = [
  {n:"01",title:"Anime wall art & posters",desc:"Look for licensed prints, clear sizing information, and seller reviews before ordering.",category:"ROOM SETUP"},
@@ -10,7 +11,7 @@ const picks = [
 ];
 
 export default function MerchPicks() {
- return <main className="site-shell"><div className="announcement">THE OTAKU FINDS <span>✦</span> SHOP SMART, COLLECT HAPPY</div><header className="nav"><Link className="brand" href="/">ANIME WORLD <span>✦</span><small>OTAKU CENTRAL</small></Link><nav className="nav-links"><Link href="/">Home</Link><Link href="/anime">Anime hub</Link><Link href="/news">News & guides</Link><Link className="active" href="/merch">Merch picks</Link></nav><Link className="nav-cta" href="/anime">Explore anime <span>↗</span></Link></header>
+ return <main className="site-shell"><AnnouncementTicker initial="THE OTAKU FINDS" suffix="SHOP SMART, COLLECT HAPPY" /><header className="nav"><Link className="brand" href="/">ANIME WORLD <span>✦</span><small>OTAKU CENTRAL</small></Link><nav className="nav-links"><Link href="/">Home</Link><Link href="/anime">Anime hub</Link><Link href="/news">News & guides</Link><Link className="active" href="/merch">Merch picks</Link></nav><Link className="nav-cta" href="/anime">Explore anime <span>↗</span></Link></header>
  <section className="page-hero"><span className="section-kicker">CURATED OTaku FINDS</span><h1>YOUR FANDOM.<br/>YOUR <span>FINDS.</span></h1><p>Merchandise ideas for anime fans, from manga shelves to licensed collectibles. We have not added unverified shopping links: this page is ready for eligible affiliate links once programmes and payment compatibility are confirmed.</p></section>
  <section className="content-grid">{picks.map(p=><article className="content-card" key={p.n}><span className="index">PICK / {p.n}</span><h3>{p.title}</h3><span className="pill">{p.category}</span><p>{p.desc}</p><div className="article-note">Affiliate link pending verification</div></article>)}</section>
  <div className="disclaimer-box"><strong>Affiliate disclosure:</strong> Some links may become affiliate links, which means this site could earn a commission if you buy through them, at no extra cost to you. No paid links are active on this starter page. We will only add programmes that accept eligible publishers and have payment methods compatible with the owner's account. Always check shipping availability, import duties, seller ratings and the product's licensing.</div>
