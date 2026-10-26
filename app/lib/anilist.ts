@@ -4,7 +4,7 @@ export type AnimeMedia = {
   coverImage?: { large?: string | null; extraLarge?: string | null };
   description?: string | null;
   genres?: string[];
-  siteUrl?: string;
+  siteUrl?: string;\n  trailer?: { id?: string | null; site?: string | null; thumbnail?: string | null } | null;
   status?: string;
   episodes?: number | null;
   season?: string | null;
@@ -34,13 +34,13 @@ async function queryAniList<T>(query: string, variables: Record<string, unknown>
 }
 
 export async function getSeasonAnime(): Promise<AnimeMedia[]> {
-  const query = `query { Page(perPage: 18) { media(season: FALL, seasonYear: 2026, sort: POPULARITY_DESC, type: ANIME) { id title { english romaji } coverImage { large extraLarge } description(asHtml: false) genres siteUrl status episodes startDate { year month day } nextAiringEpisode { airingAt episode } } } }`;
+  const query = `query { Page(perPage: 18) { media(season: FALL, seasonYear: 2026, sort: POPULARITY_DESC, type: ANIME) { id title { english romaji } coverImage { large extraLarge } trailer { id site thumbnail } description(asHtml: false) genres siteUrl status episodes startDate { year month day } nextAiringEpisode { airingAt episode } } } }`;
   const data = await queryAniList<{ Page: { media: AnimeMedia[] } }>(query);
   return data?.Page?.media ?? [];
 }
 
 export async function getUpcomingEpisodes(): Promise<AnimeMedia[]> {
-  const query = `query { Page(perPage: 20) { airingSchedules(notYetAired: true, sort: TIME) { airingAt episode media { id title { english romaji } coverImage { large extraLarge } siteUrl genres status } } } }`;
+  const query = `query { Page(perPage: 20) { airingSchedules(notYetAired: true, sort: TIME) { airingAt episode media { id title { english romaji } coverImage { large extraLarge } trailer { id site thumbnail } siteUrl genres status } } } }`;
   const data = await queryAniList<{ Page: { airingSchedules: { airingAt: number; episode: number; media: AnimeMedia }[] } }>(query);
   const entries = data?.Page?.airingSchedules ?? [];
   return entries.map((entry) => ({
@@ -50,7 +50,7 @@ export async function getUpcomingEpisodes(): Promise<AnimeMedia[]> {
 }
 
 export async function searchAnime(title: string): Promise<AnimeMedia | null> {
-  const query = `query ($search: String) { Media(search: $search, type: ANIME) { id title { english romaji } coverImage { large extraLarge } description(asHtml: false) genres siteUrl status episodes startDate { year month day } nextAiringEpisode { airingAt episode } } }`;
+  const query = `query ($search: String) { Media(search: $search, type: ANIME) { id title { english romaji } coverImage { large extraLarge } trailer { id site thumbnail } description(asHtml: false) genres siteUrl status episodes startDate { year month day } nextAiringEpisode { airingAt episode } } }`;
   const data = await queryAniList<{ Media: AnimeMedia | null }>(query, { search: title });
   return data?.Media ?? null;
 }
