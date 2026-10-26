@@ -109,3 +109,10 @@
 .news-poster-play:hover{background:#ff765e}
 
 .anime-title-link{display:block}.anime-title-link:hover h3{color:var(--hot)}
+
+
+/* Compact ticker so the full announcement remains visible on small screens */
+.announcement{height:26px;min-height:26px;padding:0 8px;gap:7px;font-size:9px;letter-spacing:.07em;white-space:nowrap}
+.announcement-rotating .ticker-message,.announcement-rotating .ticker-suffix{font-size:9px;letter-spacing:.06em}
+.announcement-rotating b{font-size:11px;flex:0 0 auto}
+@media(max-width:560px){.announcement{height:23px;min-height:23px;padding:0 5px;gap:5px;font-size:7px;letter-spacing:0}.announcement-rotating .ticker-message,.announcement-rotating .ticker-suffix{font-size:7px;letter-spacing:0}.announcement-rotating .ticker-suffix{display:inline-block}.announcement-rotating b{font-size:9px}}
