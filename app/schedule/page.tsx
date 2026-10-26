@@ -3,7 +3,12 @@ import { animeTitle, formatAnimeDate, getSeasonAnime, getUpcomingEpisodes } from
 
 export const dynamic = "force-dynamic";
 
-function trailerSearch(title: string, episode?: number | null) {\n  const query = episode ? title + " episode " + episode + " preview trailer" : title + " official anime trailer";\n  return "https://www.youtube.com/results?search_query=" + encodeURIComponent(query);\n}\n\nfunction watchSearch(title: string) {
+function trailerSearch(title: string, episode?: number | null) {
+  const query = episode ? title + " episode " + episode + " preview trailer" : title + " official anime trailer";
+  return "https://www.youtube.com/results?search_query=" + encodeURIComponent(query);
+}
+
+function watchSearch(title: string) {
   return [
     { label: "Crunchyroll", href: "https://www.crunchyroll.com/search?q=" + encodeURIComponent(title) },
     { label: "Netflix", href: "https://www.netflix.com/search?q=" + encodeURIComponent(title) },
