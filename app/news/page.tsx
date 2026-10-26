@@ -1,4 +1,5 @@
 import Link from "next/link";
+import AnnouncementTicker from "../components/announcement-ticker";
 import NewsPoster from "../components/news-poster";
 
 export const dynamic = "force-dynamic";
@@ -18,7 +19,7 @@ const guides = [
 const searchLink = (title: string) => "https://www.youtube.com/results?search_query=" + encodeURIComponent(title + " official anime trailer");
 
 export default function NewsGuides() {
-  return <main className="site-shell"><div className="announcement">THE OTAKU BRIEFING <span>✦</span> NEWS, RELEASES & GUIDES</div>
+  return <main className="site-shell"><AnnouncementTicker initial="THE OTAKU BRIEFING" suffix="NEWS, RELEASES & GUIDES" />
     <header className="nav"><Link className="brand" href="/">ANIME WORLD <span>✦</span><small>OTAKU CENTRAL</small></Link><nav className="nav-links" aria-label="Main navigation"><Link href="/">Home</Link><Link href="/anime">Anime hub</Link><Link className="active" href="/news">News & guides</Link><Link href="/schedule">Schedule</Link><Link href="/merch">Merch picks</Link></nav><Link className="nav-cta" href="/schedule">Upcoming eps <span>↗</span></Link></header>
     <section className="page-hero"><span className="section-kicker">THE OTAKU BRIEFING</span><h1>LORE, NEWS<br/>& <span>GUIDES.</span></h1><p>Anime updates linked to official announcements, plus explainers and watch resources. We separate confirmed information from rumours and link out to the source so you can verify details.</p><Link className="button button-hot" href="/schedule">See upcoming episodes <span>↗</span></Link></section>
     <section className="schedule-section"><div className="section-heading"><div><span className="section-kicker">LATEST RESOURCES</span><h2>News worth <em>checking.</em></h2></div><span className="schedule-source">Source links included</span></div>
