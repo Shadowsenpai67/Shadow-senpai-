@@ -116,3 +116,10 @@
 .announcement-rotating .ticker-message,.announcement-rotating .ticker-suffix{font-size:9px;letter-spacing:.06em}
 .announcement-rotating b{font-size:11px;flex:0 0 auto}
 @media(max-width:560px){.announcement{height:23px;min-height:23px;padding:0 5px;gap:5px;font-size:7px;letter-spacing:0}.announcement-rotating .ticker-message,.announcement-rotating .ticker-suffix{font-size:7px;letter-spacing:0}.announcement-rotating .ticker-suffix{display:inline-block}.announcement-rotating b{font-size:9px}}
+
+
+/* Slightly shorter ticker; keep the rotating announcement legible on phones */
+.announcement{height:21px;min-height:21px;padding:0 7px;gap:6px;font-size:8px;letter-spacing:.04em}
+.announcement-rotating .ticker-message,.announcement-rotating .ticker-suffix{font-size:8px;letter-spacing:.035em}
+.announcement-rotating b{font-size:10px}
+@media(max-width:560px){.announcement{height:19px;min-height:19px;padding:0 4px;gap:4px;font-size:6px;letter-spacing:0}.announcement-rotating .ticker-message,.announcement-rotating .ticker-suffix{font-size:6px;letter-spacing:0}.announcement-rotating b{font-size:8px}}
