@@ -1,8 +1,9 @@
 import Link from "next/link";
+import AnnouncementTicker from "../components/announcement-ticker";
 
 export default function DisclosurePage() {
   return <main className="site-shell">
-    <div className="announcement">CLEAR LINKS. HONEST RECOMMENDATIONS <span>✦</span> OTaku CENTRAL</div>
+    <AnnouncementTicker initial="CLEAR LINKS. HONEST RECOMMENDATIONS" suffix="OTAKU CENTRAL" />
     <header className="nav">
       <Link className="brand" href="/">ANIME WORLD <span>✦</span><small>OTAKU CENTRAL</small></Link>
       <nav className="nav-links" aria-label="Main navigation"><Link href="/">Home</Link><Link href="/anime">Anime hub</Link><Link href="/news">News & guides</Link><Link href="/merch">Merch picks</Link></nav>
