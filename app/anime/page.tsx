@@ -20,7 +20,7 @@ const series = [
   { title: "Chainsaw Man", query: "Chainsaw Man", tag: "DEVIL HUNTERS", text: "Discover the official trailer and check legal platforms for availability." },
 ];
 
-export default async function AnimeHub({ searchParams }: { searchParams: Promise<{ title?: string }> | { title?: string } }) {
+export default async function AnimeHub({ searchParams }: { searchParams: Promise<{ title?: string }> }) {
   const params = await searchParams;
   const selectedTitle = params.title || "";
   const results = await Promise.all(series.map((item) => searchAnime(item.query)));
