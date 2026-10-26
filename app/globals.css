@@ -87,3 +87,9 @@
 .news-card-copy h3 a:hover{color:var(--hot)}
 @media(max-width:850px){.anime-browser-grid{grid-template-columns:1fr;padding-left:5vw;padding-right:5vw}.anime-browser-poster,.anime-browser-poster img{min-height:230px}.anime-browser-card{grid-template-columns:minmax(110px,.65fr) minmax(0,1fr)}}
 @media(max-width:520px){.anime-browser-card{grid-template-columns:115px minmax(0,1fr)}.anime-browser-poster,.anime-browser-poster img{min-height:235px}.anime-browser-copy{padding:13px 11px}.anime-browser-copy h3{font-size:17px}.anime-browser-copy p{font-size:11px;min-height:0}.anime-browser-copy .watch-links a{font-size:9px;padding:6px}.trailer-overlay{font-size:8px;padding:7px 4px;left:5px;right:5px}}
+
+.news-poster-shell{position:absolute;inset:0;width:100%;height:100%;background:#21171a}
+.news-poster-shell img{width:100%;height:100%;display:block;object-fit:cover;aspect-ratio:3/2}
+.news-poster-shell .poster-fallback{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.news-poster-shell.is-loaded img{animation:posterFadeIn .22s ease-out}
+@keyframes posterFadeIn{from{opacity:.45}to{opacity:1}}
